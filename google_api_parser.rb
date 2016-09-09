@@ -9,11 +9,11 @@ module GoogleApiParser
 		"https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=AIzaSyCZOBiuZbRMYQ1T_fX6G-ilaRQ5zsAlE1s"
 	end
 
-	def self.geocode_get_json(geocode_url)
+	def self.geocode_get_json_and_hashify(geocode_url)
 		JSON.parse(open(geocode_url).read)
 	end
 
-	def self.lat_long_finder(geocode_hash)
+	def self.lat_long_finder_and_nearby_urlifier(geocode_hash)
 		lat_long_hash = geocode_hash["results"][0]["geometry"]["location"]
 		lat = lat_long_hash["lat"]
 		lng = lat_long_hash["lng"]
@@ -32,15 +32,17 @@ module GoogleApiParser
 
 end
 
-geocode_url = GoogleApiParser.geocode_query("48 Wall Street, NY")
+# test driver code
 
-geocode_hash = GoogleApiParser.geocode_get_json(geocode_url)
+# geocode_url = GoogleApiParser.geocode_query("48 Wall Street, NY")
 
-# geocode_hash["results"][0]["geometry"]["location"] # {"lat"=>40.09864, "lng"=> -74.097}
+# geocode_hash = GoogleApiParser.geocode_get_json(geocode_url)
 
-nearby_url = GoogleApiParser.lat_long_finder(geocode_hash)
+# # geocode_hash["results"][0]["geometry"]["location"] # {"lat"=>40.09864, "lng"=> -74.097}
+
+# nearby_url = GoogleApiParser.lat_long_finder(geocode_hash)
 
 
-parks = GoogleApiParser.nearby_query(nearby_url)
+# parks = GoogleApiParser.nearby_query(nearby_url)
 
-p GoogleApiParser.park_list(parks)
+# p GoogleApiParser.park_list(parks)
