@@ -29,6 +29,7 @@ class ToiletsInParks
   def location_response(park_list)
     @toilets.map do |toilet|
       if park_list.find { |park| /^Central Park/ =~ park }
+        binding.pry
         "There is a toilet at #{toilet.location} in #{toilet.name} in #{toilet.borough}."
       end
     end

@@ -1,7 +1,7 @@
 module View
 
   def self.user_input
-    '48 Wall Street, NY' #gets.chomp
+    '4Lior Cohen, PT, 4 East 84th Street New York, NY' #gets.chomp
   end
 
   def self.display_locations(locations)
