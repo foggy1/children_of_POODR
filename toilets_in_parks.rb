@@ -12,7 +12,7 @@ class ToiletsInParks
 
 
   def json_string_response
-    open(@base_url + @query_string).read
+    open(@base_url + '?' + @query_string).read 
   end
 
   def ruby_hash_response
@@ -27,7 +27,7 @@ class ToiletsInParks
 
   def location_response
     @toilets.map do |toilet|
-      "There is a toilet at #{toilet.location} in #{toilet.name} in #{toilet.borough}."
+      "#{toilet.location} in #{toilet.name} in #{toilet.borough}"
     end
 
   end

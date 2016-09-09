@@ -25,7 +25,7 @@ module GoogleApiParser
 		lat_long_hash = geocode_hash["results"][0]["geometry"]["location"]
 		lat = lat_long_hash["lat"]
 		lng = lat_long_hash["lng"]
-		"https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCZOBiuZbRMYQ1T_fX6G-ilaRQ5zsAlE1s&location=#{lat},#{lng}&radius=500&type=park"
+		"https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCZOBiuZbRMYQ1T_fX6G-ilaRQ5zsAlE1s&location=#{lat},#{lng}&radius=1000&type=park"
 	end
 
 	def self.nearby_query(nearby_url)
