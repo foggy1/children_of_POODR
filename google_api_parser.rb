@@ -1,0 +1,48 @@
+require 'open-uri'
+require 'json'
+require 'pry'
+
+module GoogleApiParser
+
+
+	def self.geocode_query(address)
+		"https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=AIzaSyCZOBiuZbRMYQ1T_fX6G-ilaRQ5zsAlE1s"
+	end
+
+	def self.geocode_get_json_and_hashify(geocode_url)
+		JSON.parse(open(geocode_url).read)
+	end
+
+	def self.lat_long_finder_and_nearby_urlifier(geocode_hash)
+		lat_long_hash = geocode_hash["results"][0]["geometry"]["location"]
+		lat = lat_long_hash["lat"]
+		lng = lat_long_hash["lng"]
+		"https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCZOBiuZbRMYQ1T_fX6G-ilaRQ5zsAlE1s&location=#{lat},#{lng}&radius=500&type=park"
+	end
+
+	def self.nearby_query(nearby_url)
+		JSON.parse(open(nearby_url).read)
+	end
+
+	def self.park_list(nearby_hash)
+		nearby_hash["results"].map { |place| place["name"] }
+	end
+
+
+
+end
+
+# test driver code
+
+# geocode_url = GoogleApiParser.geocode_query("48 Wall Street, NY")
+
+# geocode_hash = GoogleApiParser.geocode_get_json(geocode_url)
+
+# # geocode_hash["results"][0]["geometry"]["location"] # {"lat"=>40.09864, "lng"=> -74.097}
+
+# nearby_url = GoogleApiParser.lat_long_finder(geocode_hash)
+
+
+# parks = GoogleApiParser.nearby_query(nearby_url)
+
+# p GoogleApiParser.park_list(parks)
