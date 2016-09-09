@@ -1,7 +1,8 @@
 require 'open-uri'
 require 'json'
 require_relative 'view'
-require_relative 'model'
+require_relative 'toilets_in_parks'
+
 
 
 BASE_URL =
@@ -10,12 +11,17 @@ BASE_URL =
 QUERY_STRING = '?$q=' + View.user_input
 
 
+bathrooms = ToiletsInParks.new(BASE_URL, QUERY_STRING)
 
-toilets = ToiletsInParks.new(BASE_URL, QUERY_STRING)
+bathrooms.add_toilets
 
-json_string = toilets.json_string_response
 
-p toilets.ruby_hash_response(json_string)
+locations = bathrooms.location_response
+
+View.display_locations(locations)
+
+
+
 
 
 
