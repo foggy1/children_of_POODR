@@ -1,4 +1,5 @@
 require_relative 'toilet'
+require 'pry'
 
 class ToiletsInParks
   attr_reader :toilets
@@ -25,9 +26,11 @@ class ToiletsInParks
     end 
   end
 
-  def location_response
+  def location_response(park_list)
     @toilets.map do |toilet|
-      "There is a toilet at #{toilet.location} in #{toilet.name} in #{toilet.borough}."
+      if park_list.find { |park| /^Central Park/ =~ park }
+        "There is a toilet at #{toilet.location} in #{toilet.name} in #{toilet.borough}."
+      end
     end
 
   end

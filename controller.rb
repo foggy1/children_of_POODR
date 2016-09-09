@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'json'
+require 'pry'
 require_relative 'view'
 require_relative 'toilets_in_parks'
 require_relative 'google_api_parser'
@@ -20,7 +21,8 @@ class Controller
       query_string = '?$q=' + park
       bathrooms = ToiletsInParks.new(BASE_URL, query_string)
       bathrooms.add_toilets
-      locations = bathrooms.location_response
+      # binding.pry
+      locations = bathrooms.location_response(park_list)
       View.display_locations(locations)
     end
     # locations = bathrooms.location_response
