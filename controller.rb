@@ -19,6 +19,7 @@ bathrooms.add_toilets
 locations = bathrooms.location_response
 
 View.display_locations(locations)
+View.poodr_art
 
 
 

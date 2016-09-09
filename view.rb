@@ -10,4 +10,9 @@ class View
     end
   end
 
+  def self.poodr_art
+    art = File.read('ascii.txt')
+    puts art
+  end
+
 end
