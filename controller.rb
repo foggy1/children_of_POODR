@@ -17,7 +17,8 @@ class Controller
   def self.run
     park_list = GoogleApiParser.run(View.user_input)
     park_list.each do |park|
-      query_string = '?$q=' + park
+      p park
+      query_string = '$where=name%20like%20%27%25'+park+'%25%27'
       bathrooms = ToiletsInParks.new(BASE_URL, query_string)
       bathrooms.add_toilets
       locations = bathrooms.location_response
