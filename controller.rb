@@ -2,24 +2,40 @@ require 'open-uri'
 require 'json'
 require_relative 'view'
 require_relative 'toilets_in_parks'
-
-
+require_relative 'google_api_parser'
 
 BASE_URL =
 'https://data.cityofnewyork.us/resource/r27e-u3sy.json'
 
-QUERY_STRING = '?$q=' + View.user_input
+# QUERY_STRING = '?$q=' + View.user_input
+class Controller
+
+  # def initialize()
+  #   bathrooms = nil
+  # end
+
+  def self.run
+    park_list = GoogleApiParser.run(View.user_input)
+    park_list.each do |park|
+      query_string = '?$q=' + park
+      bathrooms = ToiletsInParks.new(BASE_URL, query_string)
+      bathrooms.add_toilets
+      locations = bathrooms.location_response
+      View.display_locations(locations)
+    end
+    # locations = bathrooms.location_response
+    # View.display_locations(locations)
+
+    View.poodr_art
+  end
 
 
-bathrooms = ToiletsInParks.new(BASE_URL, QUERY_STRING)
 
-bathrooms.add_toilets
+end
 
 
-locations = bathrooms.location_response
+Controller.run
 
-View.display_locations(locations)
-View.poodr_art
 
 
 
