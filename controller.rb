@@ -16,18 +16,28 @@ class Controller
 
   def self.run
     park_list = GoogleApiParser.run(View.user_input)
+    puts 'There are toilets at:'
     park_list.each do |park|
       p park
-      query_string = '$where=name%20like%20%27%25'+park+'%25%27'
+      # p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+      park_name = park.split(" ").join("%20")
+      query_string = '$where=name%20like%20%27%25'+park_name+'%25%27' 
+      # p query_string
+      # p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
       bathrooms = ToiletsInParks.new(BASE_URL, query_string)
       bathrooms.add_toilets
       locations = bathrooms.location_response
       View.display_locations(locations)
+
     end
     # locations = bathrooms.location_response
     # View.display_locations(locations)
-
+    if bathrooms.toilets.length == 0
+      puts 'Sorry, there are no toilets near you!'
+    end
     View.poodr_art
+
+
   end
 
 
