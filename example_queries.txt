@@ -1,0 +1,29 @@
+Getting lat and long 
+
+https://maps.googleapis.com/maps/api/geocode/json?address=Prospect+Park+Brooklyn,+NY&key=AIzaSyCZOBiuZbRMYQ1T_fX6G-ilaRQ5zsAlE1s
+
+Getting locations within a given radius after retrieving lattitude and longitude
+
+https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCZOBiuZbRMYQ1T_fX6G-ilaRQ5zsAlE1s&location=40.66155268029149,-73.96760681970849&radius=500
+
+Things to note:
+
+For address in lat and long:
+
+json?  CONSTANT
+
+address=split+string+add+plus+and+city,+state
+
+&key=api CONSTANT 
+
+For location within radius 
+
+json?  CONSTANT 
+
+key=api  CONSTANT
+
+&location = lat, long
+
+&radius = 500  CONSTANT
+
+
