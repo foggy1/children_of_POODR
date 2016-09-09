@@ -5,15 +5,23 @@ require 'pry'
 module GoogleApiParser
 
 
+	def self.run(address)
+		geocode_url = self.geocode_query(address)
+  	geocode_hash = self.geocode_get_json(geocode_url)
+  	nearby_url = self.lat_long_finder(geocode_hash)
+  	parks = self.nearby_query(nearby_url)
+  	self.park_list(parks)
+  end
+
 	def self.geocode_query(address)
 		"https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=AIzaSyCZOBiuZbRMYQ1T_fX6G-ilaRQ5zsAlE1s"
 	end
 
-	def self.geocode_get_json_and_hashify(geocode_url)
+	def self.geocode_get_json(geocode_url)
 		JSON.parse(open(geocode_url).read)
 	end
 
-	def self.lat_long_finder_and_nearby_urlifier(geocode_hash)
+	def self.lat_long_finder(geocode_hash)
 		lat_long_hash = geocode_hash["results"][0]["geometry"]["location"]
 		lat = lat_long_hash["lat"]
 		lng = lat_long_hash["lng"]

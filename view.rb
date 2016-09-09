@@ -1,7 +1,7 @@
-class View
+module View
 
   def self.user_input
-    "Alley"#gets.chomp
+    '48 East 89th Street, NY' #gets.chomp
   end
 
   def self.display_locations(locations)
