@@ -1,8 +1,4 @@
-require 'open-uri'
-require 'json'
-require_relative 'view'
-require_relative 'toilets_in_parks'
-require_relative 'google_api_parser'
+
 
 BASE_URL =
 'https://data.cityofnewyork.us/resource/r27e-u3sy.json'
@@ -10,15 +6,16 @@ BASE_URL =
 # QUERY_STRING = '?$q=' + View.user_input
 class Controller
 
-  # def initialize()
-  #   bathrooms = nil
-  # end
+  def initialize(view)
+    @view = view
+  end
 
-  def self.run
-    park_list = GoogleApiParser.run(View.user_input)
+  def run
+    park_list = GoogleApiParser.run(@view.user_input)
     puts 'There are toilets at:'
-    park_list.each do |park|
-      p park
+    all_bathrooms = []
+    park_list.map do |park|
+      next if /^Park$/.match(park)
       # p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
       park_name = park.split(" ").join("%20")
       query_string = '$where=name%20like%20%27%25'+park_name+'%25%27' 
@@ -26,16 +23,18 @@ class Controller
       # p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
       bathrooms = ToiletsInParks.new(BASE_URL, query_string)
       bathrooms.add_toilets
+      all_bathrooms << bathrooms.toilets if bathrooms.toilets.length > 0
       locations = bathrooms.location_response
-      View.display_locations(locations)
-
+      @view.display_locations(locations)
     end
     # locations = bathrooms.location_response
     # View.display_locations(locations)
-    if bathrooms.toilets.length == 0
+    if all_bathrooms.length == 0
       puts 'Sorry, there are no toilets near you!'
+    else
+    @view.poodr_art
+
     end
-    View.poodr_art
 
 
   end
@@ -45,7 +44,7 @@ class Controller
 end
 
 
-Controller.run
+# Controller.run
 
 
 
