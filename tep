@@ -1,0 +1,33 @@
+
+[1mFrom:[0m /home/austin/DBC/children_of_POODR/controller.rb @ line 26 Controller#run:
+
+    [1;34m14[0m: [32mdef[0m [1;34mrun[0m
+    [1;34m15[0m:   park_list = [1;34;4mGoogleApiParser[0m.run(@address)
+    [1;34m16[0m:   puts [31m[1;31m'[0m[31mThere are toilets at:[1;31m'[0m[31m[0m
+    [1;34m17[0m:   all_bathrooms = []
+    [1;34m18[0m:   park_list.map [32mdo[0m |park|
+    [1;34m19[0m:     [32mnext[0m [32mif[0m [35m[1;35m/[0m[35m^Park$[1;35m/[0m[35m[0m.match(park)
+    [1;34m20[0m:     [1;34m# p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'[0m
+    [1;34m21[0m:     park_name = park.split([31m[1;31m"[0m[31m [1;31m"[0m[31m[0m).join([31m[1;31m"[0m[31m%20[1;31m"[0m[31m[0m)
+    [1;34m22[0m:     query_string = [31m[1;31m'[0m[31m$where=name%20like%20%27%25[1;31m'[0m[31m[0m+park_name+[31m[1;31m'[0m[31m%25%27[1;31m'[0m[31m[0m 
+    [1;34m23[0m:     binding.pry
+    [1;34m24[0m:     [1;34m# p query_string[0m
+    [1;34m25[0m:     [1;34m# p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'[0m
+ => [1;34m26[0m:     bathrooms = [1;34;4mToiletsInParks[0m.new([1;34;4mBASE_URL[0m, query_string)
+    [1;34m27[0m:     bathrooms.add_toilets
+    [1;34m28[0m:     all_bathrooms << bathrooms.toilets [32mif[0m bathrooms.toilets.length > [1;34m0[0m
+    [1;34m29[0m: 
+    [1;34m30[0m:   [32mend[0m
+    [1;34m31[0m:   [1;34m# binding.pry[0m
+    [1;34m32[0m:   test = all_bathrooms.first.map { |bathroom| @view.location_response(bathroom) }
+    [1;34m33[0m:   [1;34m# binding.pry[0m
+    [1;34m34[0m:   [1;34m# @view.display_locations(locations)[0m
+    [1;34m35[0m:   [1;34m# locations = bathrooms.location_response[0m
+    [1;34m36[0m:   [1;34m# View.display_locations(locations)[0m
+    [1;34m37[0m:   [1;34m# if all_bathrooms.length == 0[0m
+    [1;34m38[0m:   [1;34m#   'Sorry, there are no toilets near you!'[0m
+    [1;34m39[0m:   [1;34m# end[0m
+    [1;34m40[0m: 
+    [1;34m41[0m: 
+    [1;34m42[0m: [32mend[0m
+

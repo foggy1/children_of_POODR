@@ -20,6 +20,7 @@ class Controller
       # p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
       park_name = park.split(" ").join("%20")
       query_string = '$where=name%20like%20%27%25'+park_name+'%25%27' 
+      binding.pry
       # p query_string
       # p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
       bathrooms = ToiletsInParks.new(BASE_URL, query_string)
