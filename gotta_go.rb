@@ -23,7 +23,8 @@ post '/bathrooms' do
 end
 
 get '/bathroom_list' do
-	@stuff = params.keys.first
+	stuff = params.keys.first
+      @stuff = stuff.split('<br>')
 	# binding.pry
 	erb :bathroom_list
 end
