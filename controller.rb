@@ -6,12 +6,13 @@ BASE_URL =
 # QUERY_STRING = '?$q=' + View.user_input
 class Controller
 
-  def initialize(view)
+  def initialize(view, address)
     @view = view
+    @address = address
   end
 
   def run
-    park_list = GoogleApiParser.run(@view.user_input)
+    park_list = GoogleApiParser.run(@address)
     puts 'There are toilets at:'
     all_bathrooms = []
     park_list.map do |park|
@@ -24,17 +25,17 @@ class Controller
       bathrooms = ToiletsInParks.new(BASE_URL, query_string)
       bathrooms.add_toilets
       all_bathrooms << bathrooms.toilets if bathrooms.toilets.length > 0
-      locations = bathrooms.location_response
-      @view.display_locations(locations)
-    end
-    # locations = bathrooms.location_response
-    # View.display_locations(locations)
-    if all_bathrooms.length == 0
-      puts 'Sorry, there are no toilets near you!'
-    else
-    @view.poodr_art
 
     end
+    # binding.pry
+    test = all_bathrooms.first.map { |bathroom| @view.location_response(bathroom) }
+    # binding.pry
+    # @view.display_locations(locations)
+    # locations = bathrooms.location_response
+    # View.display_locations(locations)
+    # if all_bathrooms.length == 0
+    #   'Sorry, there are no toilets near you!'
+    # end
 
 
   end

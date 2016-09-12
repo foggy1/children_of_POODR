@@ -1,0 +1,13 @@
+<% if @stuff %>
+	<p><%= @stuff %></p>
+<% else %>
+	<p>No bathrooms yet!</p>
+<% end %>
+
+<h1>Gotta Go!</h1>
+<h2>Find the nearest public park bathrooms near any given address!</h2>
+
+<form action="/bathrooms" method="post">
+	<input type="text" name="address">
+	<input type="submit">
+</form>
