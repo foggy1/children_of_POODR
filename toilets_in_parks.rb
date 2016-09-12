@@ -1,4 +1,6 @@
 require_relative 'toilet'
+require 'net/http'
+require 'pry'
 
 class ToiletsInParks
   attr_reader :toilets
@@ -12,7 +14,10 @@ class ToiletsInParks
 
 
   def json_string_response
-    open(@base_url + '?' + @query_string).read 
+    uri = URI.parse(@base_url + '?' + @query_string)
+    net_object = Net::HTTP.get_response(uri)
+    json_string = net_object.body
+    # binding.pry
   end
 
   def ruby_hash_response
