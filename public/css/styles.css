@@ -1,0 +1,30 @@
+h1 {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+h2 {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  font-size: 120%;
+}
+
+form {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  margin-top: 5px;
+  padding: 10px;
+}
+
+ul {
+  margin: auto;
+  width: 50%;
+  margin-top: 20px;
+}
+
+li {
+  padding: 2px;
+}
