@@ -20,7 +20,6 @@ class Controller
       # p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
       park_name = park.split(" ").join("%20")
       query_string = '$where=name%20like%20%27%25'+park_name+'%25%27' 
-      binding.pry
       # p query_string
       # p '++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
       bathrooms = ToiletsInParks.new(BASE_URL, query_string)
@@ -28,8 +27,12 @@ class Controller
       all_bathrooms << bathrooms.toilets if bathrooms.toilets.length > 0
 
     end
+    if all_bathrooms.length == 0
+      all_bathrooms << "Sorry, you'll have to hold it!"
+      return all_bathrooms
+    end
     # binding.pry
-    test = all_bathrooms.first.map { |bathroom| @view.location_response(bathroom) }
+    final_output = all_bathrooms.first.map { |bathroom| @view.location_response(bathroom) }
     # binding.pry
     # @view.display_locations(locations)
     # locations = bathrooms.location_response
